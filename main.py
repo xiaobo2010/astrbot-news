@@ -106,6 +106,7 @@ class DailyAINewsPlugin(Star):
     async def cmd_subscribe(self, event: AstrMessageEvent):
         """订阅每日 AI 资讯推送（在群聊中使用）"""
         umo = event.unified_msg_origin
+        logger.info(f"订阅状态: {umo}")
         if umo in self._cmd_subscriptions:
             yield event.plain_result("📢 当前会话已订阅每日AI资讯推送。")
             return
@@ -532,12 +533,12 @@ class DailyAINewsPlugin(Star):
 
         cfg_groups = self._get_config_groups()
         for group_id in cfg_groups:
-            umo = f"aiocqhttp:GroupMessage:{group_id}"
+            umo = f"default:GroupMessage:{group_id}"
             targets.add(umo)
 
         cfg_users = self._get_config_users()
         for user_id in cfg_users:
-            umo = f"aiocqhttp:FriendMessage:{user_id}"
+            umo = f"default:FriendMessage:{user_id}"
             targets.add(umo)
 
         return targets
