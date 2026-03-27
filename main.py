@@ -412,7 +412,7 @@ class DailyAINewsPlugin(Star):
         except ET.ParseError as e:
             logger.error(f"RSS XML 解析失败: {e}")
         except Exception as e:
-            logger.error(f"RSS 获取失败: {e}")
+            logger.error(f"RSS 获取失败: {type(e).__name__}: {e!r}")
 
         return None
 
